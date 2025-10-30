@@ -1,30 +1,21 @@
-import java.util.Scanner;
-import java.io.*;
+package day5;
 import java.util.*;
 
-public class Main {
+public class HashMaps {
     public static void main(String[] args) {
         Scanner s = new Scanner(System.in);
-        
-        // Create HashMap
-        HashMap<Integer, String> map = new HashMap<>();
-        
-        // Read 4 string inputs and store with keys 1-4
+                HashMap<Integer, String> map = new HashMap<>();
         for(int i = 1; i <= 4; i++) {
             String name = s.next();
             map.put(i, name);
         }
         
-        // Display original mappings
         System.out.println("Mappings of HashMap are : " + map);
         
-        // Read key to remove
         int keyToRemove = s.nextInt();
         
-        // Remove the specified key
         map.remove(keyToRemove);
         
-        // Display mappings after removal
         System.out.println("Mappings after removal are : " + map);
         
         s.close();
