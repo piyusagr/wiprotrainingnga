@@ -16,7 +16,7 @@ public class studentclass{
     }
     public static void main(String[] agrs){
         // studentclass sc=new studentclass();
-        studentclass scs=new studentclass("Piyush","A",34);
+        studentclass scs=new studentclass("Piyush",'A',34);
         // sc.name="piyush";
         // sc.grade="A";
         // sc.age=22;
