@@ -122,8 +122,6 @@ package day6;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import day5.ItemAlreadyCheckedOutException;
-import day5.ItemNotCheckedOutException;
 
 // Using custom exceptions defined in separate files
 
