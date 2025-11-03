@@ -1,27 +1,48 @@
-package day5;
+/*
+ * Question 5
+Target Sum
+Rohan is given a task two return indices of pair whose sum will be equal to the given target.
+Only one such pair is required.
+
+Input Format
+
+size of the array
+array elements
+target
+
+Output Format
+index pair whose sum is equal to the target
+
+Input 
+4
+2 7 11 15
+9
+
+Output
+(0 , 1)
+
+Explanation
+Because nums[0] + nums[1] = 2 + 7 = 9
+ */
+
+package day6;
 
 import java.util.*;
 public class TargetSum {
 
     static int[] twoSum(int n, int[] nums, int target) {
-        // HashMap to store number and its index
         HashMap<Integer, Integer> map = new HashMap<>();
         
-        // Check each number
         for(int i = 0; i < n; i++) {
-            // Find what number we need
             int complement = target - nums[i];
             
-            // If we've seen this complement before, we found our pair
             if(map.containsKey(complement)) {
                 return new int[]{map.get(complement), i};
             }
             
-            // Store current number and its index
             map.put(nums[i], i);
         }
         
-        // If no solution found (though per problem constraints, we'll always find one)
         return new int[]{-1, -1};
     }
     

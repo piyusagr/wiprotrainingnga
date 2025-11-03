@@ -1,4 +1,4 @@
-package day5;
+package day6;
 
 public class ItemNotCheckedOutException extends RuntimeException {
     public ItemNotCheckedOutException(int itemId) {

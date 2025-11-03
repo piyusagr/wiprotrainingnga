@@ -1,4 +1,16 @@
-package day5;
+// Question 2
+// generics
+// Design a generic class Test to make the main work for Number classes, do not alter main class
+
+// input :
+
+// 1 
+
+// output
+
+// "the sum is = 50.0
+
+package day6;
 import java.util.Scanner;
 
 public class GenericTest {

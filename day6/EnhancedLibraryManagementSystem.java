@@ -1,4 +1,123 @@
-package day5;
+/*
+Question 3
+Library Management System
+Description :
+You are tasked with building an enhanced Library Management System in Java. The system manages different types of items in the library, such as books, DVDs, and magazines.  Each item has common attributes like title, author/creator, a unique identifier, and a status indicating whether it is checked out or available.
+Boiler plate code implementation of base class : LibraryItem and its subclasses : Book ,DVD and Magazine, and a generic class Library representing the library are given. 
+The enhanced system introduces the ability to check out and return items. Exceptions are used to handle scenarios where an item is already checked out or not checked out when attempting to return it.
+The code starts with the main class EnhancedLibraryManagementSystemwhich contains the main method to execute the Library Management System. 
+A description of each class is provided below, along with the task that you need to complete and finish
+Classes and Methods:
+a) LibraryItem Class:
+Attributes:
+itemId (unique identifier)
+title
+creator (author for books, director for DVDs, etc.)
+checkedOut (status indicating whether the item is checked out.)
+Methods: () 
+toString(): Generates a string representation of the item.
+
+Your Tasks:
+ Constructor Implementation: (Complete the code)
+Implement the constructor for LibraryItem to initialize its attributes.
+  Getter Methods: (Complete the code)
+Define getter methods for itemId, title, and creator. which will return itemId, title and creator.
+Methods:(To be implemented)
+checkOut(): Marks the item as checked out.
+returnItem(): Marks the item as returned.
+b) Book Class (extends LibraryItem):
+Additional Attributes:
+
+numPages (number of pages) 
+Constructor:
+
+public Book(int itemId, String title, String author, int numPages);
+Methods:
+
+Inherited methods from LibraryItem. 
+
+Your Task:
+
+    Constructor Implementation: (Complete the code)
+
+Implement the Constructor : define a parameterized constructor with 4 arguments: int itemId, String title, String author, int numPages.
+Hint: Utilize the parent class's (LibraryItem) constructor.
+Implement getter method
+c) DVD Class (extends LibraryItem):
+Additional Attributes:
+
+duration (duration in minutes)
+Constructor:
+
+public DVD(int itemId, String title, String director, int duration);
+Methods:
+
+Inherited methods from LibraryItem.
+Tasks:
+
+Constructor Implementation: (Complete the code)
+        Implement the constructor. : define a parameterized constructor with 4 arguments int itemId, String title, String director, int   
+         duration.
+     Hint: Utilize the parent class's (LibraryItem) constructor.
+Implement getter method.
+d) Magazine Class (extends LibraryItem):
+Additional Attributes:
+
+issueNumber (magazine issue number)
+Constructor:
+
+public Magazine(int itemId, String title, String publisher, int issueNumber);
+Methods:
+
+Inherited methods from LibraryItem.
+Tasks:
+
+Constructor Implementation: (Complete the code) 
+   Implement the constructor. : define a parameterized constructor with 4 arguments: int itemId, String title, String publisher,   int issueNumber.
+ Hint: Utilize the parent class's (LibraryItem) constructor.
+Implement getter method.
+e) Library Class:
+Attributes:
+
+items (a list of library items)
+Methods:
+
+addItem(T item): Adds an item to the library. (Pre-Implemented)
+displayItems(): Displays details of all items in the library. (Pre-Implemented)
+checkOutItem(int itemId): Checks out an item by marking it as checked out.
+returnItem(int itemId): Returns a checked-out item by marking it as returned.
+private T findItem(int itemId): Finds an item in the library by its itemId.
+Tasks:
+
+Implement the methods: (Complete the code)
+public boolean checkOutItem(int itemId): Find the item if exist then , Checks out an item and returns true if successful, false otherwise.
+public boolean returnItem(int itemId): Find the item if exist then, Returns a checked-out item and returns true if successful, false otherwise.
+private T findItem(int itemId): Finds and returns an item by its itemId. Returns null if not found.
+
+
+Tasks:
+
+
+Custom Exceptions:( Implement)
+
+
+ItemAlreadyCheckedOutException Class (extends RuntimeException):
+
+Custom exception for handling cases where an item is already checked out. (It should display in the below given format)
+             format:  Item 101 is already checked out   
+
+Note* ( 101 is itemId)
+
+ItemNotCheckedOutException Class (extends RuntimeException):
+
+Custom exception for handling cases where an item is not checked out when attempting to return it.(It should display in the below given format)
+            format:  Item 101 is not checked out 
+
+Note* ( 101 is itemId)
+
+
+ */
+package day6;
 
 import java.util.ArrayList;
 import java.util.List;
