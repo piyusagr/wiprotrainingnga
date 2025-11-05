@@ -1,0 +1,20 @@
+The e-commerce offering online services to their clients. They are managing the product's sale and purchase through this website. They wants find the products with different categories like furniture,laptop and mobile
+
+Instructions- Display the products fall under the category furniture,laptop, mobile (Use membership operator ‘in’ ) and prices less than 50000
+
+Table: product
+Showing top 5 rows
+
+id	product_name	category	price	quantity	offers	description
+1	iphone11	mobile	35000	3	no offer	iphne 11 64 gb
+2	iphone12	mobile	48000	3	no offer	iphne 12 126 gb
+3	iphone13	mobile	50000	3	no offer	iphne 13 254 gb
+4	HP Laptop	laptop	65000	3	no offer	hp laptop i5
+5	moving chair	furniture	3000	3	no offer	moving sofa chair
+
+-- Query to find products under category furniture, laptop, mobile with price less than 50000
+select
+*
+from product p
+where p.category in ('furniture','laptop','mobile')
+and p.price < 50000;

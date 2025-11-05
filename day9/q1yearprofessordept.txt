@@ -1,0 +1,54 @@
+Write a query which displays the year in ascending order ,find for each semester how many professors are involved in delivering the session for the courses 1 to 10.
+
+The output should contain the columns : year|semester|no_of_professor
+no_of_professor: Total number of professor
+
+OUTPUT:
+Table: department
+Showing top 5 rows
+
+id	name
+1	Physical Sciences
+2	Clinical Medicine
+3	Biological Sciences
+4	Arts and Humanities
+5	Technology
+Table: professor
+Showing top 5 rows
+
+id	name	department_id	salary
+1	Martha Bailey	1	37012
+2	Harold Bell	3	35300
+3	Linda Chavez	4	31377
+4	Alan Sullivan	1	29648
+5	Brandon Sanchez	1	17149
+Table: course
+Showing top 5 rows
+
+id	name	department_id	credits
+1	Neuroscience	3	1
+2	Gender Studies	6	2
+3	South Asian Studies	6	7
+4	Physics	1	4
+5	Neo-Latin	4	5
+Table: schedule
+Showing top 5 rows
+
+professor_id	course_id	semester	year
+1	2	6	2012
+2	1	4	2016
+3	2	4	2008
+4	3	6	2005
+5	4	4	2001
+
+
+-- Query to find number of professors involved in delivering courses 1 to 10 for each semester and year
+
+select 
+s.year, 
+s.semester,
+count(distinct s.professor_id) as no_of_professor 
+from schedule s
+where s.course_id between 1 and 10
+group by s.year, s.semester
+order by s.year asc;
