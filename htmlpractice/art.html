@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Digital Art & Ideas Museum</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; background: #1a1a2e; color: #f5f5f5;
+    }
+    header, footer {
+      background: #0f3460; padding: 20px; text-align: center;
+    }
+    h1 { margin: 0; }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      padding: 40px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .exhibit {
+      background: #16213e; 
+      border-radius: 10px; 
+      overflow: hidden; 
+      position: relative;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .exhibit:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.8);
+    }
+    .exhibit img, .exhibit .text-art {
+      width: 100%; height: 200px; object-fit: cover; display: block;
+    }
+    .exhibit .info {
+      padding: 15px;
+    }
+    .exhibit .caption {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(33, 150, 243, 0.9);
+      color: #fff; display: flex;
+      align-items: center; justify-content: center;
+      opacity: 0; transition: opacity 0.4s;
+      font-size: 1.1em; text-align: center;
+      padding: 20px;
+    }
+    .exhibit:hover .caption {
+      opacity: 1;
+    }
+    footer {
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Digital Art & Ideas Museum</h1>
+    <p>Celebrating innovation across art, invention, and technology</p>
+  </header>
+  <section class="gallery">
+    <!-- Exhibit 1 -->
+    <div class="exhibit">
+      <img src="https://picsum.photos/id/1015/400/200" alt="Exhibit 1">
+      <div class="info">
+        <strong>Solitude</strong><br>
+        by Alex Rivera (2019)
+      </div>
+      <div class="caption">A study of color and mood through digital painting.</div>
+    </div>
+    <!-- Exhibit 2 -->
+    <div class="exhibit">
+      <img src="https://picsum.photos/id/1025/400/200" alt="Exhibit 2">
+      <div class="info">
+        <strong>Echoes</strong><br>
+        by Priya Sharma (2020)
+      </div>
+      <div class="caption">Symbolic textures exploring memory and technology.</div>
+    </div>
+    <!-- Exhibit 3 -->
+    <div class="exhibit">
+      <img src="https://picsum.photos/id/1031/400/200" alt="Exhibit 3">
+      <div class="info">
+        <strong>Inventive Dreams</strong><br>
+        by Rohan Patel (2021)
+      </div>
+      <div class="caption">Digital collage representing imagination and invention.</div>
+    </div>
+    <!-- Exhibit 4 -->
+    <div class="exhibit">
+      <div class="text-art" style="height:200px; background:#222; color:#fff; display:flex; align-items:center; justify-content:center;">
+        <pre>
+   //\\
+  ////\\\\
+ ( Art )
+        </pre>
+      </div>
+      <div class="info">
+        <strong>Code Artifact</strong><br>
+        by Maya Lin (2018)
+      </div>
+      <div class="caption">ASCII art merging technology with creativity.</div>
+    </div>
+    <!-- Exhibit 5 -->
+    <div class="exhibit">
+      <img src="https://picsum.photos/id/1040/400/200" alt="Exhibit 5">
+      <div class="info">
+        <strong>Quiet Circuit</strong><br>
+        by Daniel Kim (2022)
+      </div>
+      <div class="caption">Minimal circuit designs reflecting calm and order.</div>
+    </div>
+    <!-- Exhibit 6 -->
+    <div class="exhibit">
+      <img src="https://picsum.photos/id/1042/400/200" alt="Exhibit 6">
+      <div class="info">
+        <strong>Binary Grove</strong><br>
+        by Elisa Jones (2023)
+      </div>
+      <div class="caption">Generative algorithm draws nature-inspired forms.</div>
+    </div>
+  </section>
+  <footer>
+    <p>Digital Art & Ideas Museum © 2025. Experience creativity with code and imagination!</p>
+  </footer>
+</body>
+</html>

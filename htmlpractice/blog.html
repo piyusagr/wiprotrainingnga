@@ -1,0 +1,36 @@
+<!-- 
+ A heading for the post title.
+A subheading for the post author and publication date.
+A main content section for the post body.
+A section for comments where users can add their name and comment, including a "Submit" button.
+A sidebar with links to previous and next blog posts.
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Post</title>
+</head>
+<body>
+    <h2>Blog Post Title</h2>
+    <h4>by Hari Yadav on June 10, 2025</h4>
+    <main>
+        <p>This is the main content of the blog post. It contains interesting information about various topics that engage the readers and provide valuable insights.</p>
+    </main>
+    <section>
+        <form action="/submit_comment" method="post">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="comment">Comment:</label><br>
+            <textarea id="comment" name="comment" rows="4" cols="50" required></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </section>
+    <aside>
+        <a href="#">Previous Blog Post</a><br>
+        <a href="#">Next Blog Post</a>
+    </aside>
+</body>
+</html>
