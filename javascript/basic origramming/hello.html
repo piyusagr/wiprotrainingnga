@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello</title>
+</head>
+
+<body>
+    <h1>Hello, World!</h1>
+
+    <!-- creatring form normal for username, password, issubscribed and submit button -->
+    <form name="myForm" onsubmit="return validateForm()" >
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        <input type="checkbox" id="issubscribed" name="issubscribed" >
+        <label for="issubscribed">Subscribe</label><br><br>
+        <input type="submit" value="Submit">
+    </form>
+    <!-- <script>
+        console.log("Hello, World!");
+        alert("Hello, World!");
+    </script> -->
+    <!-- <script src="app.js"></script> -->
+    <script src="form.js"></script>
+</body>
+
+</html>

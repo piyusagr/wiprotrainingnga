@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Report Card</title>
+</head>
+<body>
+    <h2>Automated Student Report Card</h2>
+    <pre id="report"></pre>
+
+    <script>
+        // Sample data
+        let students = [
+            { name: "Ravi", marks: [85, 78, 92] },
+            { name: "Anjali", marks: [45, "a", 78] },
+            { name: 234, marks: [65, 70, 72] },
+            { name: "Kiran", marks: [95, 90, 93] },
+            { name: "Deepa", marks: [50, 40, 60] }
+        ];
+
+        //  Validate student object
+        function isValidStudent(student) {
+            if (typeof student.name !== "string" || student.name.trim() === "") {
+                console.warn("Invalid name found:", student);
+                return false;
+            }
+
+            if (!Array.isArray(student.marks) || student.marks.length !== 3) {
+                console.warn(" Invalid marks array for:", student.name);
+                return false;
+            }
+
+            for (let m of student.marks) {
+                if (typeof m !== "number" || isNaN(m)) {
+                    console.warn(`Invalid mark '${m}' for student: ${student.name}`);
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        //  Calculate average
+        function calculateAverage(marks) {
+            let sum = marks.reduce((a, b) => a + b, 0);
+            return (sum / marks.length).toFixed(2);
+        }
+
+        //  Get grade based on average
+        function getGrade(avg) {
+            if (avg >= 90) return "A+";
+            else if (avg >= 75) return "A";
+            else if (avg >= 60) return "B";
+            else if (avg >= 45) return "C";
+            else return "F";
+        }
+
+        //  Scholarship or allowance based on grade
+        function calculateScholarship(grade) {
+            switch (grade) {
+                case "A+": return "₹5000 Scholarship ";
+                case "A": return "₹2000 Scholarship ";
+                case "B": return "₹500 Allowance ";
+                default: return "No Scholarship ";
+            }
+        }
+
+        // Generate report
+        function generateReport(students) {
+            let report = "=== Student Report Card ===\n\n";
+            for (let s of students) {
+                if (!isValidStudent(s)) continue;
+
+                let avg = calculateAverage(s.marks);
+                let grade = getGrade(avg);
+                let scholarship = calculateScholarship(grade);
+
+                report += `Name: ${s.name}\n`;
+                report += `Marks: ${s.marks.join(", ")}\n`;
+                report += `Average: ${avg}\n`;
+                report += `Grade: ${grade}\n`;
+                report += `Scholarship: ${scholarship}\n`;
+                report += `--------------------------\n`;
+            }
+            return report;
+        }
+
+        // Display report
+        document.getElementById("report").innerText = generateReport(students);
+    </script>
+</body>
+</html>
