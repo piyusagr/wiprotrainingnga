@@ -1,0 +1,45 @@
+<!--Activity : Create a Employee Performance Tracker by calculating Total No. of Years of all Employees , filter grade wise performance and increment the bonus by 30% grade wise   -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Performance Tracker</title>
+</head>
+<body>
+    <h1>Employee Performance Tracker</h1>
+
+    <script>    
+        let employees = [
+            {name: "John", age: 34, salary: 50000, yearsOfExperience: 7},
+            {name: "Jane", age: 29, salary: 60000, yearsOfExperience: 5},
+            {name: "Bob", age: 41, salary: 75000, yearsOfExperience: 12},
+            {name: "Alice", age: 37, salary: 80000, yearsOfExperience: 10}
+        ];
+        
+        // Total Years of Experience
+        const totalYears = employees.reduce((total, emp) => total + emp.yearsOfExperience, 0);
+        console.log("Total Years of Experience: ", totalYears);
+        
+        // Filter Employees by Experience
+        const experiencedEmployees = employees.filter(emp => emp.yearsOfExperience >= 6);
+        console.log("Experienced Employees: ", experiencedEmployees);
+        
+        // Increment Salary by 30%
+        const updatedSalaries = employees.map(emp => {
+            return {...emp, salary: emp.salary * 1.3};
+        });
+        console.log("Updated Salaries: ", updatedSalaries);
+
+        // Grade Wise Bonus Calculation
+        const grades = ["A", "B", "C"];
+        const bonuses = [0.3, 0.2, 0.1];
+        const employeeBonuses = employees.map(emp => {
+            const index = Math.floor(Math.random() * grades.length);
+            return {...emp, bonus: emp.salary * bonuses[index]};
+        });
+        console.log("Employee Bonuses: ", employeeBonuses);
+    </script>
+</body>
+</html>
