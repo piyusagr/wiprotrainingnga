@@ -1,0 +1,32 @@
+<!-- Write a JavaScript program that uses the Fetch API to retrieve data from a given JSON endpoint
+(e.g., "https://dummy.restapiexample.com/api/v1/employees"). Once the data is retrieved, display it
+on the console. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Employees</title>
+</head>
+<body>
+
+    <h3>Fetched Employees</h3>
+    <ul id="employeeList"></ul>
+
+    <script>
+        fetch('https://dummy.restapiexample.com/api/v1/employees')
+        .then(response => response.json())
+        .then(json => {
+            console.log(json); // Display the retrieved data on the console
+            const employeeList = document.getElementById("employeeList");
+            json.data.forEach(employee => {
+                const li = document.createElement("li");
+                li.textContent = `${employee.employee_name} - ${employee.employee_salary}`;
+                employeeList.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>

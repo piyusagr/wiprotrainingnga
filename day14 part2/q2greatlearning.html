@@ -1,0 +1,52 @@
+<!-- 2. Create an HTML page with a button. Write a JavaScript program that, upon a button click makes a
+Fetch API request to a random user API (e.g., "https://randomuser.me/api/") displays information
+about a random user, such as their name, email, and profile picture, on the webpage. -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random User Fetcher</title>
+    <style>
+        #userInfo {
+            margin-top: 20px;
+        }
+        #userInfo img {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Random User Information</h1>
+    <button id="fetchUserBtn">Fetch Random User</button>
+    <div id="userInfo"></div>
+    <script >
+        const fetchUserBtn = document.getElementById('fetchUserBtn');
+        const userInfoDiv = document.getElementById('userInfo');    
+        function displayUserInfo(user) {
+            const nameElement = document.createElement('p');
+            nameElement.textContent = `Name: ${user.name.first} ${user.name.last}`;
+            const emailElement = document.createElement('p');
+            emailElement.textContent = `Email: ${user.email}`;
+            const profilePic = document.createElement('img');
+            profilePic.src = user.picture.large;
+            profilePic.alt = 'Profile Picture';
+            userInfoDiv.innerHTML = ''; // Clear previous info
+            userInfoDiv.appendChild(nameElement);
+            userInfoDiv.appendChild(emailElement);
+            userInfoDiv.appendChild(profilePic);    
+        }
+        fetchUserBtn.addEventListener('click', () => {
+            fetch('https://randomuser.me/api/')
+                .then(response => response.json())
+                .then(data => {
+                    const user = data.results[0];
+                    displayUserInfo(user);
+                })
+                .catch(error => console.error('Error fetching user:', error));
+        });     
+
+    </script>
+</body>
+</html>
