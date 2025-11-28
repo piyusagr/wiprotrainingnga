@@ -1,0 +1,164 @@
+<!-- # Student Management Sprint 2
+## Problem Statement
+Spring Flowers school wants to manage their students online:-
+## User Stories :-
+1. As a Student, I should be able to see TimeTable button on the menu as well.
+2. As a Student. I should be able to see my Time Table after clicking the TimeTable button.
+3. As a student. I should be able to Open and see my school application on mobile.
+## Instructions:-
+1. Please reuse the application created in sprint 1
+2. Please use HTML 5 and CSS 3 concepts
+3. Try to make a proper application
+4. Deploy the application on http server
+5. Please make sure the application should Responsive
+6. Please use flex box to arrange the content.
+7. Use Bootstrap to beautify the layout for eg: TimeTable , button etc. -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="day13q1.css">
+    <title>Student Management System</title>
+
+    <style>
+        header nav a {
+            margin-left: 20px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #333;
+        }
+        header nav a:hover {
+            color: #007bff;
+        }
+        header {
+            background: #f8f9fa;
+            padding: 15px 0;
+        }
+        main {
+            min-height: 60vh;
+        }
+
+        /* Flexbox Layout for timetable boxes (if needed later) */
+        .timetable-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <header>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h1>Spring Flowers School</h1>
+                </div>
+                <div class="col-md-6 text-end">
+                    <nav>
+                        <a href="#home">Home</a>
+                        <a href="#about">About Us</a>
+                        <a href="#timetable">Time Table</a>
+                        <a href="#contactus">Contact Us</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="home">
+        <div class="container text-center my-5">
+            <h2>Welcome to Spring Flowers School Student Management System</h2>
+            <p>Your gateway to managing your academic journey efficiently.</p>
+
+            <img src="school_image.jpg" alt="School Image" class="img-fluid my-4" style="max-height:300px; border-radius:10px;">
+
+            <div>
+                <a href="#timetable" class="btn btn-primary btn-lg">View Time Table</a>
+            </div>
+        </div>
+
+        <!-- Time Table Section -->
+        <section id="timetable" class="container my-5 timetable-container">
+            <h2 class="text-center mb-4">Student Time Table</h2>
+
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Day</th>
+                            <th>9:00 - 10:00</th>
+                            <th>10:00 - 11:00</th>
+                            <th>11:00 - 12:00</th>
+                            <th>1:00 - 2:00</th>
+                            <th>2:00 - 3:00</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Monday</td>
+                            <td>Math</td>
+                            <td>English</td>
+                            <td>Science</td>
+                            <td>Break</td>
+                            <td>Computer</td>
+                        </tr>
+                        <tr>
+                            <td>Tuesday</td>
+                            <td>History</td>
+                            <td>Math</td>
+                            <td>Science</td>
+                            <td>Break</td>
+                            <td>Sports</td>
+                        </tr>
+                        <tr>
+                            <td>Wednesday</td>
+                            <td>English</td>
+                            <td>Math</td>
+                            <td>Computer</td>
+                            <td>Break</td>
+                            <td>Science</td>
+                        </tr>
+                        <tr>
+                            <td>Thursday</td>
+                            <td>Science</td>
+                            <td>History</td>
+                            <td>English</td>
+                            <td>Break</td>
+                            <td>Sports</td>
+                        </tr>
+                        <tr>
+                            <td>Friday</td>
+                            <td>Math</td>
+                            <td>English</td>
+                            <td>Science</td>
+                            <td>Break</td>
+                            <td>Computer</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contactus" class="container my-5">
+            <h2 class="text-center mb-4">Contact Us</h2>
+            <p class="text-center">Reach out to Spring Flowers School for any queries.</p>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-3">
+        <p>&copy; 2024 Spring Flowers School. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
