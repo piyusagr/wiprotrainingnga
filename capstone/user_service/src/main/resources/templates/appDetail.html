@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${app.name} + ' - PlayStore'">App Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .star-rating { cursor: pointer; color: #ddd; }
+        .star-rating.checked { color: #ffc107; }
+        .star-rating:hover { color: #ffc107; }
+        .app-header {  color: white; }
+        .install-btn { background: #00c853; border: none; font-weight: bold; }
+        .install-btn:disabled { background: #ccc; }
+        .review-card { border-left: 4px solid #00c853; }
+        .has-reviewed { background: #e8f5e8; }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/home"><i class="fab fa-google-play"></i> Play Store</a>
+            <div class="navbar-nav ms-auto">
+                <span class="navbar-text me-3">Welcome, <strong th:text="${username}">User</strong></span>
+                <a th:href="@{/profile}" class="btn btn-outline-light btn-sm">Profile</a>
+                <a th:href="@{/logout}" class="btn btn-outline-light btn-sm ms-2">Logout</a>
+            </div>
+        </div>
+    </nav>
+    <!-- App Header -->
+    <div class="app-header p-4 bg-primary ">
+        <div class="container">
+            <div class="row align-items-center">
+                
+                <div class="col-md-10">
+                    <h1 class="mb-2" th:text="${app.name}">App Name</h1>
+                    <h3 class="mb-2" th:text="${app.genre}">App Genre </h3>
+                    
+                    <div class="d-flex align-items-center mb-3">
+                        <span class="badge bg-primary ms-2" th:text="${app.downloadCount} + ' downloads'">1M+ downloads</span>
+                    </div>
+                    <p class="mb-3" th:text="${app.description}">Short description...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <!-- Action Buttons -->
+        <div class="row mb-5">
+            <div class="col-md-8">
+                <button class="btn btn-success btn-lg install-btn px-5 py-2 me-3" 
+                        th:data-app-id="${app.id}"
+                        th:classappend="${isInstalled} ? 'disabled'" 
+                        th:text="${isInstalled} ? 'INSTALLED' : 'INSTALL'">
+                    INSTALL
+                </button>
+                <a th:href="@{/home}" class="btn btn-outline-secondary btn-lg px-4">
+                   <i class="fas fa-arrow-left me-2"></i>Back to Home
+                </a>
+            </div>
+        </div>
+
+        <!-- Review Section -->
+        <div class="row">
+            <div class="col-md-8">
+                <h3><i class="fas fa-star text-warning me-2"></i> Reviews (<span th:text="${reviewCount}">123</span>)</h3>
+                
+                <!-- Submit Review Form -->
+                <div th:if="${!hasReviewed}" class="card mb-4 p-4 shadow-sm">
+                    <h5 class="card-title">Write a review</h5>
+                    <form id="reviewForm" th:action="@{/api/reviews}" method="post">
+                        <!-- Star Rating -->
+                        <div class="star-rating-section mb-4">
+                            <label class="form-label fw-bold">Your rating:</label>
+                            <div class="star-rating-container d-flex align-items-center" id="starRating">
+                                <i class="fas fa-star star-rating fs-4 me-2" data-rating="1"></i>
+                                <i class="fas fa-star star-rating fs-4 me-2" data-rating="2"></i>
+                                <i class="fas fa-star star-rating fs-4 me-2" data-rating="3"></i>
+                                <i class="fas fa-star star-rating fs-4 me-2" data-rating="4"></i>
+                                <i class="fas fa-star star-rating fs-4 me-2" data-rating="5"></i>
+                                <span id="selectedRating" class="ms-2 fw-bold text-muted">Tap to rate</span>
+                            </div>
+                            <input type="hidden" name="rating" id="ratingInput" th:value="0">
+                            <input type="hidden" name="appId" th:value="${app.id}">
+                        </div>
+
+                        <!-- Comment -->
+                        <div class="mb-3">
+                            <label class="form-label">Review (optional)</label>
+                            <textarea class="form-control" name="comment" rows="3" placeholder="What did you like or dislike? Share your experience with our community..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success px-4">
+                            <i class="fas fa-paper-plane me-2"></i> POST REVIEW
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Already Reviewed Notice -->
+                <div th:if="${hasReviewed}" class="alert alert-success has-reviewed mb-4">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>You've already reviewed this app!</strong> 
+                    Your review will appear below after page refresh.
+                </div>
+
+                <!-- Reviews List -->
+                <div th:each="review : ${reviews}" class="card review-card mb-3 p-3 shadow-sm">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <div class="d-flex align-items-center mb-1">
+                                <strong th:text="${review.username}">Username</strong>
+                                <span class="badge bg-warning text-dark ms-2" th:text="${review.rating} + ' ★'">5 ★</span>
+                            </div>
+                            <div class="text-muted small mb-2" th:text="${#temporals.format(review.createdAt, 'MMM dd, yyyy')}">Dec 01, 2025</div>
+                            <p class="mb-0" th:text="${review.comment}">Great app! Works perfectly...</p>
+                        </div>
+                        <div class="text-end">
+                            <div class="star-display mb-1">
+                                <i class="fas fa-star text-warning" th:each="i : ${#numbers.sequence(1, review.rating)}"></i>
+                                <i class="fas fa-star text-muted" th:each="i : ${#numbers.sequence(review.rating + 1, 5)}"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Reviews -->
+                <div th:if="${reviews.isEmpty()}" class="text-center py-5 text-muted">
+                    <i class="fas fa-star fa-3x mb-3 opacity-50"></i>
+                    <h5>Be the first to review this app!</h5>
+                    <p class="mb-0">Your feedback helps other users make informed decisions.</p>
+                </div>
+            </div>
+
+            <!-- App Info Sidebar -->
+            <div class="col-md-4">
+                <div class="card sticky-top" style="top: 20px;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title" th:text="${app.name}">App Name</h5>
+                        
+                        <div class="text-start small">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span>Downloads:</span>
+                                <span class="fw-bold" th:text="${app.downloadCount}">1M+</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Reviews:</span>
+                                <span class="fw-bold" th:text="${reviewCount}">123</span>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Develop By:</span>
+                                <span class="fw-bold" th:text="${app.developer}">123</span>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer class="bg-primary min-h-9 text-white text-center py-3 mt-5">
+	    <p class="mb-0">
+	        &copy; <span >2025</span> Play Store | 
+	        Powered by Spring Cloud
+	    </p>
+	</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Star Rating Interactive
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star-rating');
+            const ratingInput = document.getElementById('ratingInput');
+            const selectedRating = document.getElementById('selectedRating');
+
+            stars.forEach(star => {
+                star.addEventListener('click', function() {
+                    const rating = this.dataset.rating;
+                    ratingInput.value = rating;
+                    selectedRating.textContent = rating + ' star' + (rating > 1 ? 's' : '');
+                    
+                    stars.forEach(s => s.classList.remove('checked'));
+                    for(let i = 0; i < rating; i++) {
+                        stars[i].classList.add('checked');
+                    }
+                });
+
+                star.addEventListener('mouseover', function() {
+                    const rating = this.dataset.rating;
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('checked', index < rating);
+                    });
+                });
+            });
+
+            document.querySelectorAll('.star-rating-container').forEach(container => {
+                container.addEventListener('mouseleave', function() {
+                    const rating = ratingInput.value || 0;
+                    stars.forEach((s, index) => {
+                        s.classList.toggle('checked', index < rating);
+                    });
+                    selectedRating.textContent = rating ? rating + ' star' + (rating > 1 ? 's' : '') : 'Tap to rate';
+                });
+            });
+
+            // Install Button AJAX
+            document.querySelectorAll('.install-btn').forEach(btn => {
+                btn.addEventListener('click', async function(e) {
+                    if (this.classList.contains('disabled')) return;
+                    
+                    const appId = this.dataset.appId;
+                    try {
+                        const response = await fetch(`/app/${appId}/install`, {
+                            method: 'POST',
+                            credentials: 'include'  // Send JWT cookie
+                        });
+                        
+                        if (response.ok) {
+                            this.textContent = 'INSTALLED';
+                            this.classList.add('disabled');
+                            this.disabled = true;
+                        }
+                    } catch (error) {
+                        console.error('Install failed:', error);
+                    }
+                });
+            });
+
+            // Review Form AJAX Submission
+            const reviewForm = document.getElementById('reviewForm');
+            if (reviewForm) {
+                reviewForm.addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    
+                    const formData = new FormData(this);
+                    try {
+                        const response = await fetch('/api/reviews', {
+                            method: 'POST',
+                            body: JSON.stringify(Object.fromEntries(formData)),
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-Requested-With': 'XMLHttpRequest'
+                            },
+                            credentials: 'include'  // JWT cookie
+                        });
+                        
+                        if (response.ok) {
+                            location.reload();  // Refresh to show new review
+                        } else {
+                            alert('Review submission failed. Please try again.');
+                        }
+                    } catch (error) {
+                        console.error('Review error:', error);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

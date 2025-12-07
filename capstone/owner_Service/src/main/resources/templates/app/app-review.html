@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${app.name} + ' - Reviews'">App Reviews</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="/owner/home">Owner Dashboard</a>
+            <span class="navbar-text me-3">Welcome, <strong th:text="${owner.displayName}">Owner</strong></span>
+            <a href="/owner/logout" class="btn btn-outline-light btn-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <!-- App Header -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-2 text-center">
+                        <div class="bg-primary text-white rounded-circle p-4 mx-auto" style="width: 100px; height: 100px;">
+                            <i class="fas fa-mobile-alt fa-2x"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-10">
+                        <h1 class="display-5 fw-bold mb-2" th:text="${app.name}">App Name</h1>
+                        <p class="h5 mb-1 text-muted" th:text="${app.category?.name}">Category</p>
+                        <p class="lead" th:text="${app.description}">Description...</p>
+                        <span class="badge bg-primary fs-6" th:text="'Reviews: ' + ${reviewCount}">Reviews: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews List -->
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0"><i class="fas fa-star me-2"></i>Reviews (<span th:text="${reviewCount}">0</span>)</h3>
+            </div>
+            <div class="card-body">
+                <div th:if="${review.isEmpty()}" class="text-center py-5 text-muted">
+                    <i class="fas fa-star fa-3x mb-3 opacity-50"></i>
+                    <h5>No reviews yet!</h5>
+                    <p class="mb-0">Be the first user to review this app.</p>
+                </div>
+                
+                <div th:each="reviews : ${review}" class="card mb-3 border-left-primary">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <strong th:text="${reviews.username}">User</strong>
+                                <small class="text-muted ms-2"
+								       th:text="${#temporals.format(reviews.createdAt, 'MMM dd, yyyy')}">
+								    Dec 01, 2025
+								</small>
+                            </div>
+                            <div class="text-warning">
+                                <!-- Stars -->
+                                <i class="fas fa-star" th:each="i : ${#numbers.sequence(1, reviews.rating)}"></i>
+                                <i class="far fa-star" th:each="i : ${#numbers.sequence(reviews.rating + 1, 5)}"></i>
+                                <span class="ms-1 fw-bold" th:text="${reviews.rating} + '/5'">5/5</span>
+                            </div>
+                        </div>
+                        <p class="mb-1" th:text="${reviews.comment}" th:if="${reviews.comment}">
+                            Great app! Highly recommend...
+                        </p>
+                        <p class="text-muted small mb-0" th:if="${reviews.comment.isEmpty()}">
+                            No comment provided.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="mt-4 text-end">
+            <a th:href="@{/owner/home}" class="btn btn-secondary me-2">
+                <i class="fas fa-arrow-left me-2"></i>Back to Dashboard
+            </a>
+            <a th:href="@{/owner/apps/edit/{id}(id=${app.id})}" class="btn btn-primary btn-md">Edit</a>
+
+        </div>
+        
+        
+    </div>
+    <footer class="footer bg-primary text-white p-2 mt-auto">
+    <div class="container">
+        <div class="row">
+            <!-- Brand & Quick Links -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="fab fa-google-play me-2"></i>PlayStore Owner
+                </h5>
+                <p class="text-white-50 mb-3">Manage your apps, track downloads, and grow your developer presence on PlayStore.</p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-6 text-right col-md-2 mb-4">
+                <h6 class="fw-bold mb-3">Quick Links</h6>
+                <ul class="list-unstyled text-white">
+                    <li><a th:href="@{/owner/home}" class="text-white">Dashboard</a></li>
+                    <li><a th:href="@{/owner/categories}" class="text-white">All Category</a></li>
+                    <li><a th:href="@{/owner/apps/new}" class="text-white">Add New App</a></li>
+                </ul>
+            </div>
+
+            
+
+           
+        </div>
+
+        <div class="footer-hr"></div>
+
+        
+    </div>
+</footer>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

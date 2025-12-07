@@ -1,0 +1,37 @@
+{"properties": [
+  {
+    "name": "spring.h2.console.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.h2.console.enabled'"
+  },
+  {
+    "name": "spring.h2.console.path",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.h2.console.path'"
+  },
+  {
+    "name": "jwt.secret",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.secret'"
+  },
+  {
+    "name": "jwt.expirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expirationMs'"
+  },
+  {
+    "name": "jwt.expirationMs",
+    "type": "java.lang.String",
+    "description": "A description for 'jwt.expirationMs'"
+  },
+  {
+    "name": "spring.cloud.config.uri",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.config.uri'"
+  },
+  {
+    "name": "spring.cloud.config.fail-fast",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.cloud.config.fail-fast'"
+  }
+]}

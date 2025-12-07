@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Category List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f5f7fb;
+        }
+        .page-wrapper {
+            margin-top: 70px;
+        }
+        .category-card {
+            border-radius: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/owner/home}">PlayStore Owner</a>
+        <div class="ms-auto d-flex gap-2">
+            <a th:href="@{/owner/apps/new}" class="btn btn-outline-light btn-sm">Add App</a>
+            <a th:href="@{/owner/logout}" class="btn btn-light btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container page-wrapper">
+    <div class="row mb-3">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h3 mb-0">Categories</h1>
+                <p class="text-muted small mb-0">
+                    Manage the categories used to classify your apps.
+                </p>
+            </div>
+            <div>
+                <a th:href="@{/owner/categories/create}" class="btn btn-primary">
+                    + Add New Category
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm category-card">
+        <div class="card-body p-0">
+            <table class="table table-hover mb-0 align-middle">
+                <thead class="table-light">
+                <tr>
+                    <th style="width: 80px;">ID</th>
+                    <th>Name</th>
+                    <th style="width: 150px;" class="text-end">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cat : ${categories}">
+                    <td th:text="${cat.id}">1</td>
+                    <td th:text="${cat.name}">Category Name</td>
+                    <td class="text-end">
+                        <form th:action="@{'/owner/categories/delete/' + ${cat.id}}"
+                              method="post"
+                              class="d-inline"
+                              onsubmit="return confirm('Delete this category?');">
+                            <input type="hidden" name="_method" value="delete"/>
+                            <button class="btn btn-outline-danger btn-sm">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(categories)}">
+                    <td colspan="3" class="text-center text-muted py-4">
+                        No categories found. 
+                        <a th:href="@{/owner/categories/create}">Create your first category.</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a th:href="@{/owner/home}" class="btn btn-outline-secondary btn-sm">
+            ← Back to Home
+        </a>
+    </div>
+</div>
+<footer class="footer bg-primary text-white p-2 mt-auto">
+    <div class="container">
+        <div class="row">
+            <!-- Brand & Quick Links -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="fab fa-google-play me-2"></i>PlayStore Owner
+                </h5>
+                <p class="text-white-50 mb-3">Manage your apps, track downloads, and grow your developer presence on PlayStore.</p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-6 text-right col-md-2 mb-4">
+                <h6 class="fw-bold mb-3">Quick Links</h6>
+                <ul class="list-unstyled text-white">
+                    <li><a th:href="@{/owner/home}" class="text-white">Dashboard</a></li>
+                    <li><a th:href="@{/owner/categories}" class="text-white">All Category</a></li>
+                    <li><a th:href="@{/owner/apps/new}" class="text-white">Add New App</a></li>
+                </ul>
+            </div>
+
+            
+
+           
+        </div>
+
+        <div class="footer-hr"></div>
+
+        
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

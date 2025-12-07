@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile • Play Store</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6 mt-5">
+                <!-- Header with Back Button -->
+                <div class="d-flex align-items-center mb-4">
+                    <a th:href="@{/home}" class="btn btn-outline-secondary me-3">
+                        <i class="fas fa-arrow-left me-1"></i>Back to Apps
+                    </a>
+                    <div>
+                        <h2 class="fw-bold text-dark mb-1">
+                            <i class="fas fa-user-circle text-primary me-2"></i>
+                            Your Profile
+                        </h2>
+                        <p class="text-muted mb-0">Manage your account settings</p>
+                    </div>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="card shadow-sm border-0">
+                    <div class="card-body p-4">
+                        <!-- Success Message -->
+                        <div th:if="${message}" class="alert alert-success alert-dismissible fade show mb-4 border-0" role="alert">
+                            <i class="fas fa-check-circle me-2"></i>
+                            <span th:text="${message}">Profile updated successfully</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+
+                        <!-- Update Profile Form -->
+                        <form th:action="@{/profile/update}" th:object="${user}" method="post">
+                            <div class="row">
+                                <!-- Username (Read-only) -->
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-medium">
+                                        <i class="fas fa-user text-muted me-2"></i>Username
+                                    </label>
+                                    <input type="text" class="form-control form-control-lg" 
+                                           th:field="*{username}" readonly 
+                                           style="background-color: #f8f9fa; cursor: not-allowed;">
+                                </div>
+
+                                <!-- Email -->
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-medium">
+                                        <i class="fas fa-envelope text-muted me-2"></i>Email
+                                    </label>
+                                    <input type="email" class="form-control form-control-lg" 
+                                           th:field="*{email}" required>
+                                </div>
+                            </div>
+
+                            <!-- Password (Optional) -->
+                            <div class="mb-4">
+                                <label class="form-label fw-medium">
+                                    <i class="fas fa-lock text-muted me-2"></i>New Password (leave blank to keep current)
+                                </label>
+                                <input type="password" class="form-control form-control-lg" 
+                                       th:field="*{password}" minlength="6">
+                                <div class="form-text">Minimum 6 characters (optional)</div>
+                            </div>
+
+                            <!-- Update Button -->
+                            <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold mb-4">
+                                <i class="fas fa-save me-2"></i>Update Profile
+                            </button>
+                        </form>
+
+                        <!-- Danger Zone - Delete Account -->
+                        <div class="border-top pt-4">
+                            <h6 class="text-danger fw-bold mb-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>Danger Zone
+                            </h6>
+                            <form th:action="@{/profile/delete}" method="post" class="d-inline">
+                                <button type="submit" class="btn btn-danger btn-lg px-4 fw-bold" 
+                                        onclick="return confirm('⚠️ Delete account permanently? This cannot be undone.');">
+                                    <i class="fas fa-trash-alt me-2"></i>Delete Account
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <a th:href="@{/logout}" class="btn btn-outline-danger w-100 fw-medium">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </a>
+                    </div>
+                    <div class="col-6">
+                        <a th:href="@{/home}" class="btn btn-outline-primary w-100 fw-medium">
+                            <i class="fas fa-home me-2"></i>Dashboard
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<footer class="bg-primary min-h-9 text-white text-center py-3 mt-5">
+	    <p class="mb-0">
+	        &copy; <span >2025</span> Play Store | 
+	        Powered by Spring Cloud
+	    </p>
+	</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

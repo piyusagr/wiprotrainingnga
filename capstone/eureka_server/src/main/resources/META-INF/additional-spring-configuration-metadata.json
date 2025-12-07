@@ -1,0 +1,22 @@
+{"properties": [
+  {
+    "name": "server.enable-self-preservation",
+    "type": "java.lang.String",
+    "description": "A description for 'server.enable-self-preservation'"
+  },
+  {
+    "name": "server.response-cache-reload-interval",
+    "type": "java.lang.String",
+    "description": "A description for 'server.response-cache-reload-interval'"
+  },
+  {
+    "name": "server.peer-node-read-timeout-ms",
+    "type": "java.lang.String",
+    "description": "A description for 'server.peer-node-read-timeout-ms'"
+  },
+  {
+    "name": "server.eviction-interval-timer-in-ms",
+    "type": "java.lang.String",
+    "description": "A description for 'server.eviction-interval-timer-in-ms'"
+  }
+]}

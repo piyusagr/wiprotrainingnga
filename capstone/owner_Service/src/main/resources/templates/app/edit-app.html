@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" crossorigin="anonymous">
+    <style>
+        body {
+            background: #f5f7fb;
+        }
+        .edit-card {
+            border-radius: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" href="#" th:href="@{/owner/home}">PlayStore Owner</a>
+        <div class="ms-auto">
+            <a th:href="@{/owner/home}" class="btn btn-outline-light btn-sm">Dashboard</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card shadow-sm edit-card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <div>
+                        <h1 class="h4 mb-0">Edit App</h1>
+                        <small class="text-light opacity-75"
+                               th:text="${app.name}">App name</small>
+                    </div>
+                    <span class="badge bg-light text-primary">
+                        ID: <span th:text="${app.id}">1</span>
+                    </span>
+                </div>
+
+                <div class="card-body">
+                    <form th:action="@{/owner/apps/update/{id}(id=${app.id})}"
+                          th:object="${app}" method="post">
+
+                        <!-- Name -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Name</label>
+                            <input type="text" th:field="*{name}"
+                                   class="form-control" required
+                                   placeholder="Enter app name"/>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Description</label>
+                            <textarea th:field="*{description}"
+                                      class="form-control" rows="3"
+                                      placeholder="Describe what your app does"></textarea>
+                        </div>
+
+                        <!-- Version + Release date on same row -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Version</label>
+                                <input type="text" th:field="*{version}"
+                                       class="form-control" required
+                                       placeholder="e.g. 1.0.3"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Release Date</label>
+                                <input type="date" th:field="*{releaseDate}"
+                                       class="form-control"/>
+                            </div>
+                        </div>
+
+                        <!-- Genre + Category -->
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Genre</label>
+                                <input type="text" th:field="*{genre}"
+                                       class="form-control"
+                                       placeholder="e.g. Productivity, Games"/>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label fw-semibold">Category</label>
+                                <div class="input-group">
+                                    <select th:field="*{category.id}" class="form-select">
+                                        <option value="" disabled
+                                                th:selected="*{category} == null">Select category</option>
+                                        <option th:each="cat : ${categories}"
+                                                th:value="${cat.id}"
+                                                th:text="${cat.name}"></option>
+                                    </select>
+                                    <a th:href="@{/owner/categories/create}"
+                                       class="btn btn-outline-primary">
+                                        New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Visibility -->
+                        <div class="mb-3 form-check form-switch">
+                            <input type="checkbox" th:field="*{visibility}"
+                                   class="form-check-input" id="visibleSwitch"/>
+                            <label class="form-check-label" for="visibleSwitch">
+                                Visible in Store
+                            </label>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-muted small">
+                                Last updated will reflect after saving.
+                            </div>
+                            <div>
+                                <a th:href="@{/owner/home}"
+                                   class="btn btn-outline-secondary me-2">Cancel</a>
+                                <button type="submit" class="btn btn-success">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer bg-primary text-white p-2 mt-auto">
+    <div class="container">
+        <div class="row">
+            <!-- Brand & Quick Links -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="fab fa-google-play me-2"></i>PlayStore Owner
+                </h5>
+                <p class="text-white-50 mb-3">Manage your apps, track downloads, and grow your developer presence on PlayStore.</p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-6 text-right col-md-2 mb-4">
+                <h6 class="fw-bold mb-3">Quick Links</h6>
+                <ul class="list-unstyled text-white">
+                    <li><a th:href="@{/owner/home}" class="text-white">Dashboard</a></li>
+                    <li><a th:href="@{/owner/categories}" class="text-white">All Category</a></li>
+                    <li><a th:href="@{/owner/apps/new}" class="text-white">Add New App</a></li>
+                </ul>
+            </div>
+            
+
+            
+
+           
+        </div>
+
+        <div class="footer-hr"></div>
+
+        
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>

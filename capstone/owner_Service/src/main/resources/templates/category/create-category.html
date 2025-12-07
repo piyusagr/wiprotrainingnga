@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Category</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          rel="stylesheet" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #f5f7fb;
+        }
+        .category-card {
+            border-radius: 0.75rem;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <div class="container">
+        <a class="navbar-brand" th:href="@{/owner/home}">PlayStore Owner</a>
+        <div class="ms-auto d-flex gap-2">
+            <a th:href="@{/owner/categories}" class="btn btn-outline-light btn-sm">All Categories</a>
+            <a th:href="@{/owner/logout}" class="btn btn-light btn-sm">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-sm category-card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h4 mb-0">Create New Category</h1>
+                    <small class="text-light opacity-75">
+                        Add a category to organize your apps
+                    </small>
+                </div>
+
+                <div class="card-body">
+                    <!-- Optional feedback from controller -->
+                    <div th:if="${msg}" class="alert alert-success py-2 mb-3" th:text="${msg}"></div>
+                    <div th:if="${error}" class="alert alert-danger py-2 mb-3" th:text="${error}"></div>
+
+                    <form th:action="@{/owner/categories/create}"
+                          th:object="${category}" method="post">
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Category Name</label>
+                            <input type="text" th:field="*{name}"
+                                   class="form-control"
+                                   placeholder="Enter category name" required/>
+                        </div>
+
+                        <div class="d-flex justify-content-between mt-3">
+                            <a th:href="@{/owner/apps/new}" class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+                            <button type="submit" class="btn btn-success">
+                                Save Category
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<footer class="footer bg-primary text-white p-2 mt-auto">
+    <div class="container">
+        <div class="row">
+            <!-- Brand & Quick Links -->
+            <div class="col-lg-6 col-md-6 mb-4">
+                <h5 class="fw-bold mb-3">
+                    <i class="fab fa-google-play me-2"></i>PlayStore Owner
+                </h5>
+                <p class="text-white-50 mb-3">Manage your apps, track downloads, and grow your developer presence on PlayStore.</p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="btn btn-outline-light btn-sm rounded-pill px-3">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-lg-6 text-right col-md-2 mb-4">
+                <h6 class="fw-bold mb-3">Quick Links</h6>
+                <ul class="list-unstyled text-white">
+                    <li><a th:href="@{/owner/home}" class="text-white">Dashboard</a></li>
+                    <li><a th:href="@{/owner/categories}" class="text-white">All Category</a></li>
+                    <li><a th:href="@{/owner/apps/new}" class="text-white">Add New App</a></li>
+                </ul>
+            </div>
+
+            
+
+           
+        </div>
+
+        <div class="footer-hr"></div>
+
+        
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+</body>
+</html>
