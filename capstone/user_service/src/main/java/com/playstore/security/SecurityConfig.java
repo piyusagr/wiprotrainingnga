@@ -49,9 +49,9 @@ public class SecurityConfig {
             )
             .authorizeHttpRequests(auth -> auth
                 // PUBLIC PAGES (Thymeleaf)
-                .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/images/**").permitAll()
+                .requestMatchers("/", "/register", "/login", "/css/**", "/js/**", "/images/**","/home").permitAll()
                 
-                //  PUBLIC API endpoints
+                //  PUBLIC API endpointshome
                 .requestMatchers("/app/{id}/downloaders", "/api/auth/**" , "/api/reviews/app/{appId}").permitAll()
                 
                 //  H2 Console (development only)

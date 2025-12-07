@@ -30,6 +30,7 @@ public class SecurityConfig {
                 .requestMatchers(
                         "/owner/login",
                         "/owner/register",
+                        "/owner/home",
                     "/owner/categories/**",
                     "/owner/apps/public",
                     "/owner/apps/{id}/downloaders",

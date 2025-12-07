@@ -11,7 +11,7 @@
         <div class="container">
             <a class="navbar-brand" href="/owner/home">Owner Dashboard</a>
             <span class="navbar-text me-3">Welcome, <strong th:text="${owner.displayName}">Owner</strong></span>
-            <a href="/owner/logout" class="btn btn-outline-light btn-sm">Logout</a>
+            <a th:href="@{/owner/logout}" class="btn btn-outline-light btn-sm">Logout</a>
         </div>
     </nav>
 
