@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<header th:fragment="header" class="bg-primary text-white p-3">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">🚀 User Microservice</a>
+            <div class="navbar-nav ms-auto" th:if="${username}">
+                <span class="nav-link">Welcome, <strong th:text="${username}"></strong></span>
+                <a class="nav-link" href="/tasks">Tasks</a>
+                <a class="nav-link" href="/login">Logout</a>
+            </div>
+        </div>
+    </nav>
+</header>
+</body>
+</html>

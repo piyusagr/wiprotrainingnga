@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+
+  # Thymeleaf
+  thymeleaf:
+    cache: false
+    mode: HTML
+    encoding: UTF-8
+  
+#   MySQL (Production - uncomment when ready)
+  datasource:
+     url: jdbc:mysql://localhost:3306/taskManagement
+     username: root
+     password: Piyush12@
+     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+     database-platform: org.hibernate.dialect.MySQLDialect
+
+
